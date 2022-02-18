@@ -1,0 +1,30 @@
+header{
+    background-color: $main-color;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    color:#fff;
+
+    .logo{
+        padding-left:100px;
+    }
+
+    .rezervation-button{
+        padding-right:100px;
+        button{
+          border: none;
+        outline: none;  
+        padding: 10px;
+        border: 1px solid $light-color;
+        border-radius: 5px;
+        font-weight: 600;
+        background: $main-color;
+        }
+        
+        
+        
+    }
+
+}
