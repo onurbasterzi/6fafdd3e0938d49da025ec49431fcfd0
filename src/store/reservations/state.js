@@ -10,6 +10,8 @@ export default function () {
       child: 0,
       room_type: 0,
       room_scenic: 0,
+      room_title: "",
+      scenic_title: "",
       price: 0,
       coupon_code: "",
       card_name: "",

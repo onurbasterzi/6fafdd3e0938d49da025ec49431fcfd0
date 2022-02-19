@@ -4,6 +4,7 @@
 @import './tabpanel.scss';
 @import './rezervation.scss';
 @import './reservation-footer.scss';
+@import './payment.scss';
 
 *{
     padding: 0;
@@ -38,7 +39,7 @@ button{
     &:hover{
        
        box-shadow:$box-shadow;
-       transform:scale(1.05)
+       
     }
 }
 
@@ -68,3 +69,23 @@ button{
     
     }
 }
+
+.router-link-active {
+    color: red;
+  }
+  
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    transition: opacity .5s ease;
+  }
+  
+  .fade-leave {}
+  
+  .fade-leave-active {
+    transition: opacity .5s ease;
+    opacity: 0;
+  }
+  

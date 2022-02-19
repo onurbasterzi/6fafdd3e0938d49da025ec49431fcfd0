@@ -1,6 +1,6 @@
 <template>
   <section class="section-container">
-    <v-select :options="hotelsData" class="vSelect" v-model="selected_hotel" label="hotel_name" @input="(value) => readValue(value)" placeholder="Rezervasyon Yapmak İstediğiniz Oteli Seçiniz">
+    <v-select :options="hotels.hotelsdata" class="vSelect" v-model="selected_hotel" label="hotel_name" @input="(value) => hotelChange(value)" placeholder="Rezervasyon Yapmak İstediğiniz Oteli Seçiniz">
       <template #no-options="{}"> Eşleşen kayıt bulunamadı. </template>
     </v-select>
     <div class="form">
@@ -14,11 +14,11 @@
       </div>
       <div class="form-item">
         <label>Yetişkin Sayısı</label>
-        <input type="number" min="0" class="input" v-model="adult" />
+        <input type="number" min="0" :max="max_adult_size" class="input" v-model="adult" />
       </div>
       <div class="form-item">
         <label>Çocuk Sayısı</label>
-        <input type="number" class="input" v-model="child" />
+        <input type="number" class="input" min="0" max="5" :disabled="child_status === 1" v-model="child" />
       </div>
     </div>
   </section>
@@ -28,30 +28,25 @@
 import "vue-select/dist/vue-select.css";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
+
 import { mapMutations, mapState } from "vuex";
 export default {
   components: {
     DatePicker,
   },
+  
   data() {
     return {
-      datalar:null
+      max_adult_size: 5,
+      child_status: 1,
     };
   },
+
   computed: {
     ...mapState({
       reservation: (state) => state.reservations.reservation,
       hotels: (state) => state.hotels,
     }),
-
-    hotelsData() {
-      return this.hotels.hotelsdata;
-    },
-
-    allreservations(){
-    this.datalar=this.reservation
-        return this.reservation
-    },
 
     selected_hotel: {
       get() {
@@ -62,8 +57,6 @@ export default {
         }
       },
       set(value) {
-        console.log("asdasdasd", value);
-        // this.$store.commit("hotels/setSelectedHotel", { id: value.id, hotel_name: value.hotel_name });
         this.setReservation({ hotel_name: value.hotel_name });
       },
     },
@@ -106,40 +99,24 @@ export default {
   methods: {
     ...mapMutations({ setReservation: "reservations/setReservation" }),
 
-    readValue(value) {
+    hotelChange(value) {
       if (value) {
         console.log("computed", this.selected_hotel);
         this.$store.dispatch("hotels/getDetails", value.id).then((res) => {
           this.$store.commit("reservations/setReservation", { hotel_id: res[0].hotel_id });
-          console.log("rezervation info", this.reservation);
+          this.max_adult_size = this.hotels.hoteldetailsdata[0].max_adult_size;
+          this.child_status = this.hotels.hoteldetailsdata[0].child_status ? 0 : 1;
+          this.setReservation({ adult: "0" });
+          this.setReservation({ child: "0" });
+          this.setReservation({ room_scenic: "0" });
+          this.setReservation({ room_type: "0" });
+          console.log("max adult size", this.max_adult_size);
         });
       }
     },
   },
 
-  created() {
-
-    if (this.hotelsData.length == 0) {
-      if (localStorage.getItem("reservation")) { 
-        const savedData = JSON.parse(localStorage.getItem("reservation"));
-        console.log(savedData);
-        this.$store.commit("reservations/setReservation", savedData);
-      } else {
-      }
-      this.$store.dispatch("hotels/get").then((res) => {
-        console.log("commit");
-      });
-    } else {
-      console.log("state");
-
-      // SON GÖNDERİM ANINDA HOTEL NAME ALANINI SİL
-    //   let dataaaa={...this.allreservations};
-    //   delete dataaaa.hotel_name
-    //     console.log('dataaaa',dataaaa);
-    //         console.log('stateeeeee',this.allreservations);
-
-    }
-  },
+  created() {},
 };
 </script>
 

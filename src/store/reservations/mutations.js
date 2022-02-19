@@ -12,6 +12,9 @@ export function setReservation(state, reservationData) {
   state.reservation.room_type=reservationData.room_type?reservationData.room_type:state.reservation.room_type
   state.reservation.room_scenic=reservationData.room_scenic?reservationData.room_scenic:state.reservation.room_scenic
 
+  state.reservation.room_title=reservationData.room_title?reservationData.room_title:state.reservation.room_title
+  state.reservation.scenic_title=reservationData.scenic_title?reservationData.scenic_title:state.reservation.scenic_title
+
   state.reservation.price=reservationData.price?reservationData.price:state.reservation.price
   state.reservation.coupon_code=reservationData.coupon_code?reservationData.coupon_code:state.reservation.coupon_code
   state.reservation.card_name=reservationData.card_name?reservationData.card_name:state.reservation.card_name

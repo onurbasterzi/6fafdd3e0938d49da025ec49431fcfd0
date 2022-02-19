@@ -1,0 +1,184 @@
+.payment-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 30px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+  .card-info-container {
+    width: calc(50% - 55px);
+    padding: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 5px;
+
+    .credit-card {
+      margin-bottom: 30px;
+      position: relative;
+
+      .front {
+        background-color: $main-color;
+        background-image: linear-gradient(147deg, $main-color 0%, #000000 74%);
+        border-radius: 10px;
+        backface-visibility: hidden;
+        box-shadow: $box-shadow;
+        height: 200px;
+        padding: 20px;
+        width: 90%;
+        transform: perspective(1000px) rotateY(0);
+        transition: transform 0.5s ease-out;
+
+        &:focus {
+          transform: perspective(1000px) rotateY(-180deg);
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 10px;
+
+          p {
+            color: $light-color;
+            font-size: 1.8rem;
+            font-weight: 800;
+          }
+
+          img {
+            height: 50px;
+          }
+        }
+        .card-number {
+          display: flex;
+          align-items: center;
+          padding: 25px 0;
+          gap: 20px;
+          img {
+            height: 50px;
+          }
+          span {
+            font-size: 1.8rem;
+            color: $light-color;
+          }
+        }
+
+        .card-info {
+          display: flex;
+
+          .item {
+            font-size: 1rem;
+            color: $light-color;
+            .card-holder {
+              font-size: 1.2rem;
+            }
+            label {
+              display: block;
+            }
+            span {
+              font-size: 1.2rem;
+            }
+            &:nth-child(1) {
+              margin-right: auto;
+            }
+          }
+        }
+      }
+
+      .back {
+        background-color: $main-color;
+        background-image: linear-gradient(147deg, $main-color 0%, #000000 74%);
+        border-radius: 10px;
+        height: 200px;
+        padding: 20px 0;
+        position: absolute;
+        width: calc(90% + 40px);
+        top: 0;
+        left: 0;
+        text-align: right;
+        backface-visibility: hidden;
+        box-shadow: $box-shadow;
+        transition: transform 0.5s ease-out;
+
+        .stripe {
+          background: #000;
+          width: 100%;
+          margin: 10px 0;
+          height: 50px;
+        }
+
+        .item {
+          padding: 0 20px;
+          span {
+            color: $light-color;
+            font-size: 1rem;
+          }
+          .cvv-box {
+            height: 50px;
+            margin-top: 5px;
+            color: #333;
+            background: $light-color;
+            border-radius: 5px;
+            width: 100%;
+          }
+
+          img {
+            margin-top: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+
+    &::before {
+      content: "Kredi Kartı Bilgileri";
+      position: absolute;
+      font-weight: bold;
+      top: -15px;
+      left: 20px;
+      background-color: $light-color;
+      padding: 5px;
+    }
+    .card-item {
+      margin-bottom: 10px;
+    }
+    .card-item-flex {
+      display: flex;
+      justify-content: space-between;
+      gap: 5px;
+      .flex-item {
+        width: 35%;
+        &.year {
+          width: 20%;
+          display: flex;
+          align-items: flex-end;
+        }
+      }
+    }
+  }
+  .preview-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 15px);
+    .reservation-info{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        
+        .item{
+            width: calc(50% - 20px);
+            text-align: center;
+            margin:5px;
+            padding: 5px;
+            background-color: $main-color;
+            color:$light-color;
+            border-radius: 5px;
+            box-shadow: $box-shadow-sm;
+            label{
+                display: block;
+                font-weight: 800;
+            }
+        }
+    }
+  }
+}

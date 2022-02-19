@@ -34,9 +34,9 @@ export default {
         this.$router.push("/payment-preview");
       }
     },
-    makePayment(){
-        console.log('payment ****************************');
-    }
+    makePayment() {
+      console.log("payment ****************************");
+    },
   },
 
   mounted() {
