@@ -14,13 +14,19 @@
     <div class="room-types">
       <h2>Oda Tipi Seçimi</h2>
       <div class="room-types-item-container">
-        <div v-for="item in hotels.hoteldetailsdata[0].room_type" :key="item.id" :class="selectedRoom === item.id ? 'selected' : ''" class="room-types-item" @click="setRoomType(item.id, item.title)">
+        <div
+          v-for="item in hotels.hoteldetailsdata[0].room_type"
+          :key="item.id"
+          :class="selectedRoom === item.id ? 'selected' : ''"
+          class="room-types-item"
+          @click="setRoomType(item.id, item.title, item.price)"
+        >
           <h3>{{ item.title }}</h3>
           <img :src="item.photo" alt="" />
           <div class="details">
             <p>
-              {{ item.price * getNumberOfDays }} TL <br />
-              {{ getNumberOfDays }} Gün
+              {{ (item.price * totalDays).toLocaleString() }} TL <br />
+              {{ totalDays }} Gün
             </p>
             <p>
               {{ reservation.adult }} Yetişkin <br />
@@ -38,7 +44,7 @@
           :class="selectedScenic === item.id ? 'selected' : ''"
           :key="item.id"
           class="room-types-item"
-          @click="setScenic(item.id, item.title)"
+          @click="setScenic(item.id, item.title, item.price_rate)"
         >
           <h3>{{ item.title }}</h3>
           <img :src="item.photo" alt="" />
@@ -54,6 +60,7 @@
 
 <script>
 import { mapMutations, mapState } from "vuex";
+import { dateDiff } from "../../tools";
 export default {
   data() {
     return {
@@ -67,33 +74,25 @@ export default {
       hotels: (state) => state.hotels,
     }),
 
-    getNumberOfDays() {
-      const date1 = new Date(this.reservation.start_date);
-      const date2 = new Date(this.reservation.end_date);
+    accomodationPrice() {
+      return this.reservation.room_price * this.totalDays;
+    },
 
-      // One day in milliseconds
-      const oneDay = 1000 * 60 * 60 * 24;
-
-      // Calculating the time difference between two dates
-      const diffInTime = date2.getTime() - date1.getTime();
-
-      // Calculating the no. of days between two dates
-      const diffInDays = Math.round(diffInTime / oneDay);
-
-      return diffInDays;
+    totalDays() {
+      return dateDiff(this.reservation.start_date, this.reservation.end_date);
     },
   },
 
   methods: {
     ...mapMutations({ setReservation: "reservations/setReservation" }),
 
-    setRoomType(roomTypeId, title) {
+    setRoomType(roomTypeId, title, price) {
       this.selectedRoom = roomTypeId;
-      this.setReservation({ room_type: roomTypeId, room_title: title });
+      this.setReservation({ room_type: roomTypeId, room_title: title, room_price: price });
     },
-    setScenic(scenicTypeId, title) {
+    setScenic(scenicTypeId, title, price_rate) {
       this.selectedScenic = scenicTypeId;
-      this.setReservation({ room_scenic: scenicTypeId, scenic_title: title });
+      this.setReservation({ room_scenic: scenicTypeId, scenic_title: title, price_rate: price_rate });
     },
   },
 

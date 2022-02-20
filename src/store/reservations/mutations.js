@@ -15,14 +15,21 @@ export function setReservation(state, reservationData) {
   state.reservation.room_title=reservationData.room_title?reservationData.room_title:state.reservation.room_title
   state.reservation.scenic_title=reservationData.scenic_title?reservationData.scenic_title:state.reservation.scenic_title
 
+  state.reservation.room_price=reservationData.room_price?reservationData.room_price:state.reservation.room_price
+  state.reservation.price_rate=reservationData.price_rate?reservationData.price_rate:state.reservation.price_rate
+
   state.reservation.price=reservationData.price?reservationData.price:state.reservation.price
   state.reservation.coupon_code=reservationData.coupon_code?reservationData.coupon_code:state.reservation.coupon_code
+  state.reservation.discount_ammount=reservationData.discount_ammount?reservationData.discount_ammount:state.reservation.discount_ammount
+  state.reservation.coupon_status=reservationData.coupon_status?reservationData.coupon_status:state.reservation.coupon_status
+
   state.reservation.card_name=reservationData.card_name?reservationData.card_name:state.reservation.card_name
   state.reservation.card_number=reservationData.card_number?reservationData.card_number:state.reservation.card_number
   state.reservation.card_date_month=reservationData.card_date_month?reservationData.card_date_month:state.reservation.card_date_month
   state.reservation.card_date_year=reservationData.card_date_year?reservationData.card_date_year:state.reservation.card_date_year
   state.reservation.card_cvv=reservationData.card_cvv?reservationData.card_cvv:state.reservation.card_cvv
+}
 
- 
-
+export function setCoupon(state, couponData) {
+      state.coupons=couponData
 }

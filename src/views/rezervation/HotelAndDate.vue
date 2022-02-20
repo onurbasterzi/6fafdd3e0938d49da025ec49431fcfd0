@@ -83,7 +83,7 @@ export default {
         return this.reservation.adult;
       },
       set(value) {
-        this.setReservation({ adult: value });
+        this.setReservation({ adult: parseInt(value) });
       },
     },
     child: {
@@ -91,7 +91,7 @@ export default {
         return this.reservation.child;
       },
       set(value) {
-        this.setReservation({ child: value });
+        this.setReservation({ child: parseInt(value) });
       },
     },
   },

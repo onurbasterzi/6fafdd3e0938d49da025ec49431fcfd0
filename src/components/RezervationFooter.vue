@@ -35,7 +35,10 @@ export default {
       }
     },
     makePayment() {
-      console.log("payment ****************************");
+      const reservation = this.$store.state.reservations.reservation;
+      localStorage.setItem("reservation", JSON.stringify(reservation));
+      console.log(reservation);
+      this.$router.push("/preview");
     },
   },
 

@@ -5,11 +5,10 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/reservation-preview",
+    path: "/preview",
     name: "ReservationPreview",
-    component: () => import("../views/test/Test.vue")
+    component: () => import("../views/preview/Final.vue")
   },
-
 
    {
     path: "/",
