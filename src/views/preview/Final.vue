@@ -52,6 +52,7 @@ export default {
     updateReservation() {
       this.isNewReservation = true;
       this.setReservation({action_status:'update'})
+      localStorage.setItem("reservation",JSON.stringify(this.reservation))
       this.$router.push("/");
     },
     deleteReservation() {
@@ -84,7 +85,6 @@ export default {
       });
     },
   },
-
 
   beforeRouteLeave(to, from, next) {
     if (!this.isNewReservation) {

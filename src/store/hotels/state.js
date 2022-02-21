@@ -1,7 +1,7 @@
 export default function () {
     return {
       hotelsdata:[],
-      selectedhoteldata:null,
+      selectedhoteldata:[],
       hoteldetailsdata:[],
      
     }

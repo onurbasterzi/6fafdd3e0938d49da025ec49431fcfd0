@@ -151,17 +151,17 @@ export default {
 
   methods: {
     ...mapMutations({ setReservation: "reservations/setReservation", setLoader: "reservations/setLoader" }),
-    ...mapActions({ GET_HOTEL_DETAILS: "hotels/GET_HOTEL_DETAILS" }),
+    ...mapActions({ GET_SELECTED_DETAILS: "hotels/GET_SELECTED_DETAILS" }),
 
     hotelChange(value) {
       if (value) {
-    
         this.setLoader("show");
-        this.GET_HOTEL_DETAILS(value.id)
+        this.GET_SELECTED_DETAILS(value.id)
           .then((res) => {
             this.setReservation({ hotel_id: res[0].hotel_id });
-            this.setReservation({ max_adult_size: this.hotels.hoteldetailsdata[0].max_adult_size });
-            this.child_status = this.hotels.hoteldetailsdata[0].child_status ? 0 : 1;
+  
+            this.setReservation({ max_adult_size: res[0].max_adult_size });
+            this.child_status = res[0].child_status ? 0 : 1;
             this.setReservation({ child: 0 });
             this.setReservation({ room_scenic: 0 });
             this.setReservation({ room_type: 0 });
@@ -174,8 +174,6 @@ export default {
       }
     },
   },
-
-
 };
 </script>
 

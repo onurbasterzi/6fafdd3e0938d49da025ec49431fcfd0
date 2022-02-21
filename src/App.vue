@@ -35,10 +35,13 @@ export default {
       if (localStorage.getItem("reservation")) {
         const savedData = JSON.parse(localStorage.getItem("reservation"));
         this.setReservation(savedData);
-        this.GET_HOTEL_DETAILS(savedData.hotel_id).then().catch(err=>{ this.$toast.error(`Hata:${err.message}`);});
       }
+      this.GET_HOTEL_DETAILS().then().catch(err=>{ 
+        this.$toast.error(`Hata:${err.message}`);
+        });
       this.GET_HOTELS().then(() => {this.setLoader('hide')}).catch(this.setLoader('hide'));
     } else {
+
       this.setLoader('hide')
     }
   },
