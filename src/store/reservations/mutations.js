@@ -1,5 +1,5 @@
 export function setReservation(state, reservationData) {
-  console.log("in mutations", reservationData);
+
 
   state.reservation.hotel_id=reservationData.hotel_id?reservationData.hotel_id:reservationData.hotel_id!=0?state.reservation.hotel_id:0
   state.reservation.hotel_name=reservationData.hotel_name?reservationData.hotel_name:reservationData.hotel_id!=""?state.reservation.hotel_name:''

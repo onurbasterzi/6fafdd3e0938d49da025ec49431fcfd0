@@ -20,17 +20,11 @@ body {
 
 #app {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  @include flex($direction:column);
   .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flex($direction:column);
     width: 1000px;
-    // margin: 0 auto;
   }
 }
 
@@ -95,19 +89,19 @@ button {
   padding-left: 10px;
   font-size: 14px;
   line-height: 1.4;
-  color: #555;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  color: $input-color;
+  background-color: $light-color;
+  border: 1px solid $border-color;
   border-radius: 5px;
   -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
   box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
   outline: none;
 
   &:hover {
-    border-color: #409aff !important;
+    border-color: $main-color !important;
   }
   &:focus {
-    border-color: #409aff !important;
+    border-color: $main-color !important;
   }
 }
 
@@ -132,10 +126,7 @@ button {
 }
 
 .not-found{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  @include flex($direction:column);
   height: 90vh;
   h1{
     font-size:100px

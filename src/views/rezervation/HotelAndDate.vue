@@ -15,7 +15,7 @@
       <div class="form">
         <div class="form-item" :class="{ 'form-group--error': $v.start_date.$error }">
           <label>Giriş Tarihi</label>
-          <date-picker v-model="$v.start_date.$model" valueType="format" format="YYYY-MM-DD" ></date-picker>
+          <date-picker v-model="$v.start_date.$model" valueType="format" format="YYYY-MM-DD"></date-picker>
           <div class="error" v-if="!$v.start_date.today">Geçmiş tarih seçilemez.</div>
         </div>
         <div class="form-item" :class="{ 'form-group--error': $v.end_date.$error }">
@@ -44,7 +44,7 @@
 <script>
 import "vue-select/dist/vue-select.css";
 import DatePicker from "vue2-datepicker";
-import 'vue2-datepicker/locale/tr';
+import "vue2-datepicker/locale/tr";
 import RezervationFooter from "../../components/RezervationFooter.vue";
 import "vue2-datepicker/index.css";
 
@@ -58,7 +58,7 @@ export default {
 
   data() {
     return {
-      child_status: 1,
+      child_status: 0,
     };
   },
 
@@ -150,33 +150,32 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ setReservation: "reservations/setReservation",setLoader:"reservations/setLoader" }),
-    ...mapActions({GET_HOTEL_DETAILS:"hotels/GET_HOTEL_DETAILS"}),
+    ...mapMutations({ setReservation: "reservations/setReservation", setLoader: "reservations/setLoader" }),
+    ...mapActions({ GET_HOTEL_DETAILS: "hotels/GET_HOTEL_DETAILS" }),
 
     hotelChange(value) {
       if (value) {
-        console.log("computed", this.selected_hotel);
-        this.setLoader('show')
-        this.GET_HOTEL_DETAILS(value.id).then((res) => {
-          this.setReservation({ hotel_id: res[0].hotel_id });
-          this.setReservation({ max_adult_size: this.hotels.hoteldetailsdata[0].max_adult_size });
-          this.child_status = this.hotels.hoteldetailsdata[0].child_status ? 0 : 1;
-          console.log('child',this.child_status );
-          this.setReservation({ child: 0 });
-          this.setReservation({ room_scenic: 0 });
-          this.setReservation({ room_type: 0 });
-          console.log("max adult size", this.max_adult_size);
-          this.setLoader('hide')
-        }).catch(err=>{
-          this.setLoader('hide')
-        });
+    
+        this.setLoader("show");
+        this.GET_HOTEL_DETAILS(value.id)
+          .then((res) => {
+            this.setReservation({ hotel_id: res[0].hotel_id });
+            this.setReservation({ max_adult_size: this.hotels.hoteldetailsdata[0].max_adult_size });
+            this.child_status = this.hotels.hoteldetailsdata[0].child_status ? 0 : 1;
+            this.setReservation({ child: 0 });
+            this.setReservation({ room_scenic: 0 });
+            this.setReservation({ room_type: 0 });
+            this.setLoader("hide");
+          })
+          .catch((err) => {
+            this.setLoader("hide");
+            this.$toast.error(`Hata:${err.message}`);
+          });
       }
     },
   },
 
-  created() {
-    console.log("fron vvvv", this.reservation);
-  },
+
 };
 </script>
 

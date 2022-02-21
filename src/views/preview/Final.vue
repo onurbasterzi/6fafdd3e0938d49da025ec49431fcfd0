@@ -57,7 +57,7 @@ export default {
     deleteReservation() {
       
       this.$swal({
-        title: "Rezervasyonu İptali",
+        title: "Rezervasyon İptali !",
         text: "Rezervasyon kaydınızı iptal etmek istediğinize emin misiniz?",
         type: "warning",
         showCancelButton: true,
@@ -67,7 +67,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.setLoader('show');
-          console.log(this.reservation.last_post_id);
+         
           this.DELETE_RESERVATION(this.reservation.last_post_id)
             .then((res) => {
               this.isNewReservation = true;
@@ -78,23 +78,15 @@ export default {
             })
             .catch((err) => {
               this.setLoader('hide');
-              this.$swal({
-                title: "HATA!",
-                text: err.message,
-                type: "danger",
-              });
+              this.$toast.error(`Hata:${err.message}`);
             });
         }
       });
     },
   },
 
-  created() {
-    console.log(this.reservation);
-  },
 
   beforeRouteLeave(to, from, next) {
-    console.log(this.isNewReservation);
     if (!this.isNewReservation) {
       this.$router.go(1);
     } else {

@@ -128,9 +128,7 @@ export default {
     this.selectedScenic = this.reservation.room_scenic;
     this.setLoader('hide')
   },
-  updated(){
-    
-  }
+
 };
 </script>
 

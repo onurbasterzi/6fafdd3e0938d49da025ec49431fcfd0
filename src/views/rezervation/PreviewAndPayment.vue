@@ -86,6 +86,7 @@ export default {
             this.setLoader('hide')
         }).catch(err=>{
           this.setLoader('hide')
+           this.$toast.error(`Hata:${err.message}`);
         });
       }
     },

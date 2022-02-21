@@ -35,7 +35,6 @@ export default {
       }
       else{
         this.clearReservation();
-         
       }
     },
   },

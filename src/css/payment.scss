@@ -1,15 +1,13 @@
 .payment-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  @include flex($justify:space-between,$align:flex-start);
   width: 100%;
   padding: 30px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: $box-shadow-md;
 
   .card-info-container {
     width: calc(50%);
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid $border-color;
     position: relative;
     border-radius: 5px;
 
@@ -34,9 +32,8 @@
         }
 
         .logo {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+      
+          @include flex($justify:space-between);
           padding-top: 10px;
 
           p {
@@ -64,7 +61,7 @@
         }
 
         .card-info {
-          display: flex;
+          @include flex();
 
           .item {
             font-size: 1rem;
@@ -151,6 +148,7 @@
           width: 20%;
           display: flex;
           align-items: flex-end;
+          @include flex($align: flex-end);
         }
       }
     }
@@ -158,6 +156,7 @@
   .preview-container {
     display: flex;
     flex-direction: column;
+  
     width: calc(50% - 15px);
     h2 {
       color: $dark-color;

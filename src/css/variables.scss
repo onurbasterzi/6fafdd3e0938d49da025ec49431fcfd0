@@ -1,20 +1,27 @@
-$header-bg:#09005a;
 $section-bg:#eeeeee;
-
 $main-color:#409aff;
 $light-color:#fefefe;
 $dark-color:#313131;
 $warning:#ff6464;
-
-$box-shadow:10px 10px 20px rgba(0,0,0,.2);
-$box-shadow-sm:1px 1px 10px rgba(0,0,0,.2);
-
-
+$border-color:#cccccc;
+$input-color:#555555;
 
 $loaderbg:rgba(0,0,0,.5);
 $dot: #909090;
 $line: #F8F8F8;
 
+
+$box-shadow:10px 10px 20px rgba(0,0,0,.2);
+$box-shadow-sm:1px 1px 10px rgba(0,0,0,.2);
+$box-shadow-md:2px 2px 10px rgba(0,0,0,.2);
+
+
+@mixin flex($direction: row, $justify:center,$align:center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
 
 @mixin centered(){
     margin: auto;
