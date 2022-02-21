@@ -6,8 +6,8 @@ export default function () {
       hotel_name:"",
       start_date: "",
       end_date: "",
-      adult: 0,
-      child: 0,
+      adult: null,
+      child: null,
       room_type: 0,
       room_scenic: 0,
       room_title: "",
@@ -16,14 +16,16 @@ export default function () {
       room_price:0,
       price_rate:0,
       coupon_code: "",
-      coupon_status:"",
       discount_ammount:0,
       card_name: "",
       card_number: "",
       card_date_month: "",
       card_date_year: "",
       card_cvv: "",
+      max_adult_size:5,
+      action_status:"add",
+      last_post_id:""
     },
-    coupons:[]
+    coupons:[],
   };
 }

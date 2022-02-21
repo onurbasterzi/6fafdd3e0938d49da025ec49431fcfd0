@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -16,7 +17,16 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState({
+      reservation: (state) => state.reservations.reservation,
+    }),
+  },
+
+  props: ["validation"],
+
   methods: {
+    ...mapActions({ POST_RESERVATION: "reservations/POST_RESERVATION", UPDATE_RESERVATION: "reservations/UPDATE_RESERVATION" }),
     back() {
       if (this.$route.name == "Room") {
         this.$router.push("/");
@@ -26,19 +36,49 @@ export default {
       }
     },
     saveAndContinue() {
+      this.validation.$touch();
       const reservation = this.$store.state.reservations.reservation;
       localStorage.setItem("reservation", JSON.stringify(reservation));
       if (this.$route.name === "Hotel") {
-        this.$router.push("/room-type");
+        if (!this.validation.$invalid) {
+          this.$router.push("/room-type");
+        }
       } else if (this.$route.name === "Room") {
-        this.$router.push("/payment-preview");
+        if (!this.validation.$invalid) {
+          this.$router.push("/payment-preview");
+        }
       }
     },
     makePayment() {
-      const reservation = this.$store.state.reservations.reservation;
-      localStorage.setItem("reservation", JSON.stringify(reservation));
-      console.log(reservation);
-      this.$router.push("/preview");
+      this.validation.$touch();
+
+      if (!this.validation.$invalid) {
+        const reservation = this.$store.state.reservations.reservation;
+
+        let formData = { ...reservation };
+        delete formData.room_title;
+        delete formData.discount_ammount;
+        delete formData.hotel_name;
+        delete formData.price_rate;
+        delete formData.room_price;
+        delete formData.scenic_title;
+        delete formData.max_adult_size;
+        delete formData.action_status;
+        delete formData.last_post_id;
+
+        if (reservation.action_status === "add") {
+          this.POST_RESERVATION(formData).then((res) => {
+            localStorage.setItem("reservation", JSON.stringify(this.reservation));
+          });
+        } else if (reservation.action_status === "update") {
+          this.UPDATE_RESERVATION([this.reservation.last_post_id, formData]).then((res) => {
+            localStorage.setItem("reservation", JSON.stringify(this.reservation));
+          });
+        }
+
+        console.log("formdata", formData);
+        this.$router.push("/preview");
+      }
     },
   },
 

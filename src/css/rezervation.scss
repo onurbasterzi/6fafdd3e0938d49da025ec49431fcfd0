@@ -10,12 +10,14 @@
   .form {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:flex-start;
     width: 100%;
     .form-item {
       display: flex;
       flex-direction: column;
       margin: 20px 0;
+      width: 20%;
+      max-width: 20%;
       label {
         font-weight: 600;
         padding-bottom: 5px;
@@ -58,6 +60,11 @@
       text-align: left;
       width: 100%;
       margin-bottom: 20px;
+
+      span{
+        font-size:14px;
+        color: red;
+      }
     }
 
     .room-types-item-container {
@@ -98,11 +105,56 @@
 
 
   .card-info{
-    
     .form-item{
       input,select{
         margin: 10px 0;
       }
+    }
+  }
+}
+
+
+@media(max-width:768px){
+  .section-container {
+    .form{
+      flex-direction: column;
+      .form-item{
+        width: 100%;
+        max-width: 100%;
+
+        .mx-datepicker{
+          width: 100%;
+         
+        }
+
+        .input{
+          width: 100%;
+        }
+      }
+    }
+    .hotel-info {
+      text-align: center;
+      ul{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .room-types {
+          padding: 10px 0;
+          h2{
+            text-align: center;
+            margin-bottom: 5px;
+            margin-top: 15px;
+          }
+        .room-types-item-container{
+          width: 100%;
+          flex-direction: column;
+          .room-types-item{
+            width: 100%;
+            margin-bottom: 10px;
+          }
+        }
     }
   }
 }
