@@ -65,12 +65,11 @@ export function clearReservation(state) {
 }
 
 export function setCoupon(state, couponData) {
-      state.coupons=couponData
+  state.coupons=couponData
 }
 
-export function setLastPostId(state, lastPostId) {
-  state.last_post_id=lastPostId
+export function setLoader(state, showHide) {
+  state.showHide=showHide
 }
-
 
 

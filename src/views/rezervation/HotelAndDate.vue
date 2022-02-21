@@ -33,6 +33,7 @@
           <label>Çocuk Sayısı</label>
           <input type="number" class="input" min="0" max="5" :disabled="child_status === 1" v-model.trim.lazy="$v.child.$model" />
           <div class="error" v-if="!$v.child.between">Maximum çocuk sayısı 5.</div>
+          <div class="child" v-if="child_status === 1">Çocuk ziyaretçi kabul edilmiyor!</div>
         </div>
       </div>
     </section>
@@ -149,20 +150,25 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ setReservation: "reservations/setReservation" }),
+    ...mapMutations({ setReservation: "reservations/setReservation",setLoader:"reservations/setLoader" }),
     ...mapActions({GET_HOTEL_DETAILS:"hotels/GET_HOTEL_DETAILS"}),
 
     hotelChange(value) {
       if (value) {
         console.log("computed", this.selected_hotel);
+        this.setLoader('show')
         this.GET_HOTEL_DETAILS(value.id).then((res) => {
           this.setReservation({ hotel_id: res[0].hotel_id });
           this.setReservation({ max_adult_size: this.hotels.hoteldetailsdata[0].max_adult_size });
           this.child_status = this.hotels.hoteldetailsdata[0].child_status ? 0 : 1;
+          console.log('child',this.child_status );
           this.setReservation({ child: 0 });
           this.setReservation({ room_scenic: 0 });
           this.setReservation({ room_type: 0 });
           console.log("max adult size", this.max_adult_size);
+          this.setLoader('hide')
+        }).catch(err=>{
+          this.setLoader('hide')
         });
       }
     },

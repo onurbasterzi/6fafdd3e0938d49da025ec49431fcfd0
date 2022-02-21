@@ -26,6 +26,7 @@ export default function () {
       action_status:"add",
       last_post_id:""
     },
+    showHide:'hide',
     coupons:[],
   };
 }

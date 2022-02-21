@@ -14,7 +14,6 @@
       </div>
       <div class="room-types">
         <h2>Oda Tipi Seçimi <span v-if="$v.selectedRoom.$error">Lütfen oda tipi seçiniz.</span></h2>
-        <!-- <div class="error" v-if="!$v.selectedRoom.checked">Geçmiş tarih seçilemez.</div> -->
         <div class="room-types-item-container">
           <div
             :style="$v.selectedRoom.$error ? 'border:3px solid #ff6464' : ''"
@@ -98,6 +97,7 @@ export default {
   computed: {
     ...mapState({
       reservation: (state) => state.reservations.reservation,
+      
       hotels: (state) => state.hotels,
     }),
 
@@ -111,7 +111,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ setReservation: "reservations/setReservation" }),
+    ...mapMutations({ setReservation: "reservations/setReservation",setLoader: "reservations/setLoader"}),
 
     setRoomType(roomTypeId, title, price) {
       this.selectedRoom = roomTypeId;
@@ -126,7 +126,11 @@ export default {
   created() {
     this.selectedRoom = this.reservation.room_type;
     this.selectedScenic = this.reservation.room_scenic;
+    this.setLoader('hide')
   },
+  updated(){
+    
+  }
 };
 </script>
 

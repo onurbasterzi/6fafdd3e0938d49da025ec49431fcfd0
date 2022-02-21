@@ -51,7 +51,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ setReservation: "reservations/setReservation" }),
+    ...mapMutations({ setReservation: "reservations/setReservation",setLoader:"reservations/setLoader"  }),
     ...mapActions({ GET_COUPON: "reservations/GET_COUPON" }),
     getValidation(value) {
       this.validation = value;
@@ -59,6 +59,7 @@ export default {
 
     checkCoupon() {
       if (this.coupon_code.trim(' ') != "") {
+        this.setLoader('show')
         this.GET_COUPON(this.coupon_code).then((res) => {
           const data = [...res.data];
           if (data.length > 0) {
@@ -82,9 +83,15 @@ export default {
             this.coupon_status= "Geçersiz kupon kodu" ;
             this.setReservation({ coupon_code: "", discount_ammount: 0});
           }
+            this.setLoader('hide')
+        }).catch(err=>{
+          this.setLoader('hide')
         });
       }
     },
+    created(){
+      this.setLoader('hide')
+    }
   },
 
 };

@@ -41,7 +41,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ clearReservation: "reservations/clearReservation",setReservation:'reservations/setReservation' }),
+    ...mapMutations({ clearReservation: "reservations/clearReservation",setReservation:'reservations/setReservation' ,setLoader:"reservations/setLoader"}),
     ...mapActions({ DELETE_RESERVATION: "reservations/DELETE_RESERVATION" }),
     newReservation() {
       this.isNewReservation = true;
@@ -55,9 +55,10 @@ export default {
       this.$router.push("/");
     },
     deleteReservation() {
+      
       this.$swal({
-        title: "Rezervasyonu silmek üzeresiniz!",
-        text: "Silme işlemi geri alınamaz. Yine de işlemi gerçekleştirmek istiyormusunuz?",
+        title: "Rezervasyonu İptali",
+        text: "Rezervasyon kaydınızı iptal etmek istediğinize emin misiniz?",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#ff6464",
@@ -65,15 +66,18 @@ export default {
         cancelButtonText: "Vazgeç",
       }).then((result) => {
         if (result.value) {
+          this.setLoader('show');
           console.log(this.reservation.last_post_id);
           this.DELETE_RESERVATION(this.reservation.last_post_id)
             .then((res) => {
               this.isNewReservation = true;
               localStorage.removeItem("reservation");
               this.clearReservation();
+              this.setLoader('hide');
               this.$router.push("/");
             })
             .catch((err) => {
+              this.setLoader('hide');
               this.$swal({
                 title: "HATA!",
                 text: err.message,

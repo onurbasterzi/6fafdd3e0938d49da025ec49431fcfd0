@@ -150,11 +150,12 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({ setReservation: "reservations/setReservation" }),
+    ...mapMutations({ setReservation: "reservations/setReservation",setLoader:"reservations/setLoader" }),
   },
 
   created() {
     this.$emit("validation", this.$v);
+    this.setLoader('hide')
   },
 };
 </script>
