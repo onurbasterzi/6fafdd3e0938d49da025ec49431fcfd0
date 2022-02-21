@@ -6,11 +6,11 @@
     <div class="reservation-info">
       <div class="item">
         <label>Giriş Tarihi</label>
-        <span>{{ reservation.start_date }}</span>
+        <span>{{ reservation.start_date | moment("DD.MM.YYYY") }}</span>
       </div>
       <div class="item">
         <label>Çıkış Tarihi</label>
-        <span>{{ reservation.end_date }}</span>
+        <span>{{ reservation.end_date | moment("DD.MM.YYYY") }}</span>
       </div>
       <div class="item">
         <label>Yetişkin</label>
@@ -41,7 +41,7 @@
         <span>% {{ reservation.price_rate }}</span>
       </div>
       <div class="item">
-        <label>Konaklama ({{ totalDays }} Gün)</label>
+        <label>Konaklama ({{ totalDays  }} Gün)</label>
         <span>{{ accomodationPrice.toLocaleString() }} TL</span>
       </div>
       <div class="item">

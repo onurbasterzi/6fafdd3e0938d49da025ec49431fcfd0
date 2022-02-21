@@ -63,7 +63,7 @@
 
       span{
         font-size:14px;
-        color: red;
+        color: $warning;
       }
     }
 
@@ -114,7 +114,7 @@
 }
 
 
-@media(max-width:768px){
+@media(max-width:1000px){
   .section-container {
     .form{
       flex-direction: column;

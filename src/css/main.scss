@@ -19,13 +19,17 @@ body {
 
 #app {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 1000px;
-    margin: 0 auto;
+    // margin: 0 auto;
   }
 }
 
@@ -47,35 +51,35 @@ button {
 .vs__clear {
   display: none;
 }
-// .mx-icon-clear {
-//   // svg {
-//   //   display: none;
-//   // }
-// }
+.mx-icon-clear {
+  svg {
+    display: none;
+  }
+}
 
 .error {
   font-size: 12px;
-  color: red;
+  color: $warning;
   padding-top: 5px;
 }
 
 .form-group--error {
   .vs__dropdown-toggle {
-    border: 1px solid red;
+    border: 1px solid $warning;
     transition: all 0.3s ease;
   }
 
   .mx-datepicker {
     .mx-input-wrapper {
       input {
-        border: 1px solid red;
+        border: 1px solid $warning;
         transition: all 0.3s ease;
       }
     }
   }
 
   .input {
-    border: 1px solid red;
+    border: 1px solid $warning;
     transition: all 0.3s ease;
   }
 }
@@ -107,7 +111,7 @@ button {
 }
 
 .router-link-active {
-  color: red;
+  color: $warning;
 }
 
 .fade-enter {
@@ -126,11 +130,25 @@ button {
   opacity: 0;
 }
 
-@media (max-width: 768px) {
+.not-found{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 90vh;
+  h1{
+    font-size:100px
+  }
+  button{
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 1000px) {
   #app {
     width: 100%;
     .main-container {
-      width: 100%;
+      width:95%;
     }
   }
 }

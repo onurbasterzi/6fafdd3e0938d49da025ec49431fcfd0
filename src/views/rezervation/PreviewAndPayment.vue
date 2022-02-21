@@ -8,7 +8,7 @@
           <input type="text" placeholder="Kupon Kodu" class="input" v-model="coupon_code" />
           <button @click="checkCoupon">Kodu Kullan</button>
         </div>
-        <div class="coupon-status" :style="reservation.discount_ammount != 0 ? 'color:green' : 'color:red'">{{ coupon_status }}</div>
+        <div class="coupon-status" :style="reservation.discount_ammount != 0 ? 'color:green' : 'color:#ff6464'">{{ coupon_status }}</div>
       </div>
     </section>
     <rezervation-footer :validation="validation"></rezervation-footer>
@@ -17,7 +17,7 @@
 
 <script>
 import Payment from "./Payment.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations,mapActions } from "vuex";
 import PreviewInfo from "../../components/PreviewInfo.vue";
 import RezervationFooter from "../../components/RezervationFooter.vue";
 export default {
@@ -52,14 +52,14 @@ export default {
 
   methods: {
     ...mapMutations({ setReservation: "reservations/setReservation" }),
-
+    ...mapActions({ GET_COUPON: "reservations/GET_COUPON" }),
     getValidation(value) {
       this.validation = value;
     },
 
     checkCoupon() {
       if (this.coupon_code.trim(' ') != "") {
-        this.$store.dispatch("reservations/GET_COUPON", this.coupon_code).then((res) => {
+        this.GET_COUPON(this.coupon_code).then((res) => {
           const data = [...res.data];
           if (data.length > 0) {
             var BreakException = {};
@@ -72,7 +72,7 @@ export default {
                    this.coupon_status= "İndirim kodu uygulandi." ;
                   throw BreakException;
                 }
-                this.setReservation({ coupon_code: "", discount_ammount: "0"});
+                this.setReservation({ coupon_code: "", discount_ammount: 0});
                 this.coupon_status= "Süresi geçmiş kupon kodu." ;
               });
             } catch (e) {
@@ -80,16 +80,13 @@ export default {
             }
           } else {
             this.coupon_status= "Geçersiz kupon kodu" ;
-            this.setReservation({ coupon_code: "", discount_ammount: "0"});
+            this.setReservation({ coupon_code: "", discount_ammount: 0});
           }
         });
       }
     },
   },
 
-  created() {
-    console.log(this.reservation);
-  },
 };
 </script>
 

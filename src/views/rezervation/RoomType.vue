@@ -6,8 +6,8 @@
           {{ reservation.hotel_name }} <span>({{ hotels.hoteldetailsdata[0].city }})</span>
         </h2>
         <ul>
-          <li>Giriş Tarihi: {{ reservation.start_date }}</li>
-          <li>Çıkış Tarihi: {{ reservation.end_date }}</li>
+          <li>Giriş Tarihi: {{ reservation.start_date | moment("DD.MM.YYYY") }}</li>
+          <li>Çıkış Tarihi: {{ reservation.end_date | moment("DD.MM.YYYY") }}</li>
           <li>Yetişkin Sayısı: {{ reservation.adult }}</li>
           <li>Çocuk Sayısı {{ reservation.child }}</li>
         </ul>
@@ -17,7 +17,7 @@
         <!-- <div class="error" v-if="!$v.selectedRoom.checked">Geçmiş tarih seçilemez.</div> -->
         <div class="room-types-item-container">
           <div
-            :style="$v.selectedRoom.$error ? 'border:3px solid red' : ''"
+            :style="$v.selectedRoom.$error ? 'border:3px solid #ff6464' : ''"
             v-for="item in hotels.hoteldetailsdata[0].room_type"
             :key="item.id"
             :class="selectedRoom === item.id ? 'selected' : ''"
@@ -44,7 +44,7 @@
         <h2>Manzara Seçimi <span v-if="$v.selectedScenic.$error">Lütfen manzara seçiniz.</span></h2>
         <div class="room-types-item-container">
           <div
-            :style="$v.selectedScenic.$error ? 'border:3px solid red' : ''"
+            :style="$v.selectedScenic.$error ? 'border:3px solid #ff6464' : ''"
             v-for="item in hotels.hoteldetailsdata[0].room_scenic"
             :class="selectedScenic === item.id ? 'selected' : ''"
             :key="item.id"
@@ -69,7 +69,7 @@
 import { mapMutations, mapState } from "vuex";
 import { dateDiff } from "../../tools";
 import RezervationFooter from "../../components/RezervationFooter.vue";
-import { required, minLength, between } from "vuelidate/lib/validators";
+
 export default {
   components: {
     RezervationFooter,

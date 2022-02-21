@@ -1,7 +1,7 @@
 import axios from "axios";
 const APIROUTE='https://5f6d939160cf97001641b049.mockapi.io/tkn'
 
-export function get({ commit }) {
+export function GET_HOTELS({ commit }) {
     return new Promise((resolve, reject) => {
         console.log(APIROUTE+"/hotels");
       axios
@@ -18,7 +18,7 @@ export function get({ commit }) {
     });
   }
 
-  export function getDetails({ commit },id) {
+  export function GET_HOTEL_DETAILS({ commit },id) {
     return new Promise((resolve, reject) => {
         console.log(APIROUTE+"/hotel-details");
       axios

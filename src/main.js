@@ -10,6 +10,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.use(VueSweetalert2);
 Vue.use(Vuelidate)
+Vue.use(require('vue-moment'));
 
 Vue.component("v-select", vSelect);
 

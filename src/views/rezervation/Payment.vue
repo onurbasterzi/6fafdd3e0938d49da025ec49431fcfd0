@@ -34,12 +34,12 @@
     </div>
     <div class="card-item" :class="{ 'form-group--error': $v.card_name.$error }">
       <label>Kart Üzerindeki İsim</label>
-      <input type="text" class="input" v-model.trim="$v.card_name.$model"  />
+      <input type="text" class="input" v-model.trim="$v.card_name.$model" />
     </div>
     <div class="card-item" :class="{ 'form-group--error': $v.card_number.$error }">
       <label>Kart Numarası</label>
       <input type="number" class="card-number input" v-model.trim="$v.card_number.$model" />
-       <div class="error" v-if="$v.card_number.$error">Kart numaraı 16 haneli olmalıdır.</div>
+      <div class="error" v-if="$v.card_number.$error">Kart numaraı 16 haneli olmalıdır.</div>
     </div>
     <div class="card-item-flex">
       <div class="flex-item" :class="{ 'form-group--error': $v.card_date_month.$error }">
@@ -48,7 +48,6 @@
           <option value="" selected disabled>Ay</option>
           <option v-for="item in 12" :key="item" :value="item.toString().length == 1 ? '0' + item : item">{{ item.toString().length == 1 ? "0" + item : item }}</option>
         </select>
-        
       </div>
       <div class="flex-item year" :class="{ 'form-group--error': $v.card_date_year.$error }">
         <select v-model="card_date_year" name="" id="" class="card-year input">
@@ -66,36 +65,36 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import { required,  maxLength,minLength } from "vuelidate/lib/validators";
+import { required, maxLength, minLength } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
-      isim: "Ad Soyad",
-      numara: "################",
+ 
       cvv: false,
     };
   },
 
   validations() {
     return {
-      card_name:{
-        required
+      card_name: {
+        required,
       },
-       card_number:{
+      card_number: {
         required,
         minLength: minLength(16),
-        maxLength: maxLength(16)
+        maxLength: maxLength(16),
       },
-      card_date_month:{
-        required
+      card_date_month: {
+        required,
       },
-      card_date_year:{
-        required
+      card_date_year: {
+        required,
       },
-      card_cvv:{
+      card_cvv: {
         required,
         minLength: minLength(3),
-      }
+        maxLength: maxLength(3),
+      },
     };
   },
 
@@ -145,6 +144,7 @@ export default {
         return this.reservation.card_cvv;
       },
       set(value) {
+       
         this.setReservation({ card_cvv: value });
       },
     },

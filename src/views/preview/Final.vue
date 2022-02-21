@@ -3,7 +3,8 @@
     <section class="preview-container">
       <div class="preview-actions">
         <box-icon name="calendar-check" size="75px" color="green"></box-icon>
-        <p>Rezervasyon kaydınız alınmıştır.</p>
+        <p v-if="reservation.action_status==='add'">Rezervasyon kaydınız alınmıştır.</p>
+         <p v-else>Rezervasyonunuz güncellenmiştir.</p>
         <p>Rezervasyon özetiniz aşağıdaki gibidir. Rezervasyon kaydınızda değişiklik veya yeni rezervasyon yapmak için aşağıdaki linkleri kullanabilirsiniz.</p>
         <div class="button-group">
           <button @click="newReservation">Yeni Rezervasyon Yap</button>
@@ -56,10 +57,10 @@ export default {
     deleteReservation() {
       this.$swal({
         title: "Rezervasyonu silmek üzeresiniz!",
-        text: "Silme işlem geri alınamaz. Yine de işlemi gerçekleştirmek istiyormusunuz?",
+        text: "Silme işlemi geri alınamaz. Yine de işlemi gerçekleştirmek istiyormusunuz?",
         type: "warning",
         showCancelButton: true,
-        confirmButtonColor: "red",
+        confirmButtonColor: "#ff6464",
         confirmButtonText: "Evet, Sil!",
         cancelButtonText: "Vazgeç",
       }).then((result) => {

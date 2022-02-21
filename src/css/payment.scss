@@ -223,12 +223,32 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .payment-container {
     flex-direction: column-reverse;
 
     .card-info-container {
+
+      .credit-card {
+        .front {
+          padding: 60px;
+        }
+        .back{
+          padding: 60px;
+        }
+      }
+
       width: 100%;
+      .card-item-flex {
+        flex-direction: column;
+        .flex-item{
+          width: 100%;
+
+          &.year{
+            width: 100%;
+          }
+        }
+      }
     }
     .preview-container {
       width: 100%;
@@ -250,9 +270,12 @@
 @media (max-width: 450px) {
   .payment-container {
     .card-info-container {
+      
       .credit-card {
+       
         .front {
           width: 100%;
+          padding: 15px;
           .logo {
             p {
               font-size: 16px;
@@ -284,6 +307,7 @@
           }
         }
         .back {
+          padding: 15px 0;
           .stripe {
             height: 25px;
           }

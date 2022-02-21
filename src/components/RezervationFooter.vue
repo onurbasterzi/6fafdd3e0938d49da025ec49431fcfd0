@@ -37,14 +37,15 @@ export default {
     },
     saveAndContinue() {
       this.validation.$touch();
-      const reservation = this.$store.state.reservations.reservation;
-      localStorage.setItem("reservation", JSON.stringify(reservation));
+
       if (this.$route.name === "Hotel") {
         if (!this.validation.$invalid) {
+          localStorage.setItem("reservation", JSON.stringify(this.reservation));
           this.$router.push("/room-type");
         }
       } else if (this.$route.name === "Room") {
         if (!this.validation.$invalid) {
+          localStorage.setItem("reservation", JSON.stringify(this.reservation));
           this.$router.push("/payment-preview");
         }
       }
@@ -53,9 +54,8 @@ export default {
       this.validation.$touch();
 
       if (!this.validation.$invalid) {
-        const reservation = this.$store.state.reservations.reservation;
-
-        let formData = { ...reservation };
+  
+        let formData = { ...this.reservation };
         delete formData.room_title;
         delete formData.discount_ammount;
         delete formData.hotel_name;
@@ -66,18 +66,19 @@ export default {
         delete formData.action_status;
         delete formData.last_post_id;
 
-        if (reservation.action_status === "add") {
+        if (this.reservation.action_status === "add") {
           this.POST_RESERVATION(formData).then((res) => {
             localStorage.setItem("reservation", JSON.stringify(this.reservation));
+            console.log("formdata", formData);
+            this.$router.push("/preview");
           });
-        } else if (reservation.action_status === "update") {
+        } else if (this.reservation.action_status === "update") {
           this.UPDATE_RESERVATION([this.reservation.last_post_id, formData]).then((res) => {
             localStorage.setItem("reservation", JSON.stringify(this.reservation));
+            console.log("formdata", formData);
+            this.$router.push("/preview");
           });
         }
-
-        console.log("formdata", formData);
-        this.$router.push("/preview");
       }
     },
   },

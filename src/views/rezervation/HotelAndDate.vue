@@ -15,12 +15,12 @@
       <div class="form">
         <div class="form-item" :class="{ 'form-group--error': $v.start_date.$error }">
           <label>Giriş Tarihi</label>
-          <date-picker v-model="$v.start_date.$model" valueType="format"></date-picker>
+          <date-picker v-model="$v.start_date.$model" valueType="format" format="YYYY-MM-DD" ></date-picker>
           <div class="error" v-if="!$v.start_date.today">Geçmiş tarih seçilemez.</div>
         </div>
         <div class="form-item" :class="{ 'form-group--error': $v.end_date.$error }">
           <label>Çıkış Tarihi</label>
-          <date-picker v-model="$v.end_date.$model" valueType="format"></date-picker>
+          <date-picker v-model="$v.end_date.$model" valueType="format" format="YYYY-MM-DD"></date-picker>
           <div class="error" v-if="$v.end_date.$error">Ç.Tarihi G.Tarihinden büyük olmalıdır.</div>
         </div>
         <div class="form-item" :class="{ 'form-group--error': $v.adult.$error }">
@@ -43,10 +43,11 @@
 <script>
 import "vue-select/dist/vue-select.css";
 import DatePicker from "vue2-datepicker";
+import 'vue2-datepicker/locale/tr';
 import RezervationFooter from "../../components/RezervationFooter.vue";
 import "vue2-datepicker/index.css";
 
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import { required, between } from "vuelidate/lib/validators";
 export default {
   components: {
@@ -149,14 +150,14 @@ export default {
 
   methods: {
     ...mapMutations({ setReservation: "reservations/setReservation" }),
+    ...mapActions({GET_HOTEL_DETAILS:"hotels/GET_HOTEL_DETAILS"}),
 
     hotelChange(value) {
       if (value) {
         console.log("computed", this.selected_hotel);
-        this.$store.dispatch("hotels/getDetails", value.id).then((res) => {
-          this.$store.commit("reservations/setReservation", { hotel_id: res[0].hotel_id });
-          this.$store.commit("reservations/setReservation", { max_adult_size: this.hotels.hoteldetailsdata[0].max_adult_size });
-
+        this.GET_HOTEL_DETAILS(value.id).then((res) => {
+          this.setReservation({ hotel_id: res[0].hotel_id });
+          this.setReservation({ max_adult_size: this.hotels.hoteldetailsdata[0].max_adult_size });
           this.child_status = this.hotels.hoteldetailsdata[0].child_status ? 0 : 1;
           this.setReservation({ child: 0 });
           this.setReservation({ room_scenic: 0 });
