@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Payment from "./Payment.vue";
+import Payment from "../../components/Payment.vue";
 import { mapState, mapMutations,mapActions } from "vuex";
 import PreviewInfo from "../../components/PreviewInfo.vue";
 import RezervationFooter from "../../components/RezervationFooter.vue";

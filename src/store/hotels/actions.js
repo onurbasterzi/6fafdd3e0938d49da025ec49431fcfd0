@@ -1,10 +1,10 @@
-import axios from "axios";
-const APIROUTE = "https://5f6d939160cf97001641b049.mockapi.io/tkn";
+import api from '../../api'
 
 export function GET_HOTELS({ commit }) {
   return new Promise((resolve, reject) => {
-    axios
-      .get(APIROUTE + "/hotels")
+    // console.log('route',APIROUTE);
+    api
+      .get("/hotels")
       .then((response) => {
         let data = response.data;
         commit("setHotels", data);
@@ -30,8 +30,8 @@ export function GET_SELECTED_DETAILS({ commit, state }, id) {
 
 export function GET_HOTEL_DETAILS({ commit }) {
   return new Promise((resolve, reject) => {
-    axios
-      .get(APIROUTE + "/hotel-details")
+    api
+      .get("/hotel-details")
       .then((response) => {
  
         commit("setHotelDetails", response.data);

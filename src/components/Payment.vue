@@ -5,10 +5,10 @@
         <div class="logo">
           <!-- <img src="../../assets/chip.png" alt=""> -->
           <p>KREDI KARTI</p>
-          <img src="../../assets/master.png" alt="" />
+          <img src="../assets/master.png" alt="" />
         </div>
         <div class="card-number">
-          <img src="../../assets/chip.png" alt="" />
+          <img src="../assets/chip.png" alt="" />
           <span>{{ card_number | cardnumber }}</span>
         </div>
         <div class="card-info">
@@ -28,7 +28,7 @@
         <div class="item">
           <span>CVV: {{ card_cvv }}</span>
           <div class="cvv-box"></div>
-          <img src="../../assets/master.png" alt="" />
+          <img src="../assets/master.png" alt="" />
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ export default {
   data() {
     return {
  
-      cvv: false,
+      cvv: false
     };
   },
 

@@ -6,8 +6,12 @@ import vSelect from "vue-select";
 import Vuelidate from 'vuelidate'
 import VueSweetalert2 from 'vue-sweetalert2';
 import Toast from "vue-toastification";
-
+import API from './api';
 import "vue-toastification/dist/index.css";
+
+
+
+Vue.prototype.$api = API;
 
 const options = {
   position: "bottom-right",

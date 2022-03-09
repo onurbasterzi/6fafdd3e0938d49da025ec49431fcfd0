@@ -1,10 +1,10 @@
-const APIROUTE = "https://5f6d939160cf97001641b049.mockapi.io/tkn";
-import axios from "axios";
+
+import api from '../../api'
 export function GET_COUPON({ commit }, code) {
   return new Promise((resolve, reject) => {
    
-    axios
-      .get(APIROUTE + `/coupons?code=${code}`)
+    api
+      .get(`/coupons?code=${code}`)
       .then((response) => {
         let data = response.data;
         commit("setCoupon", data);
@@ -18,8 +18,8 @@ export function GET_COUPON({ commit }, code) {
 
 export function POST_RESERVATION({ commit }, formData) {
   return new Promise((resolve, reject) => {
-    axios
-      .post(APIROUTE + "/hotel-bookings", formData)
+    api
+      .post("/hotel-bookings", formData)
       .then((response) => {
         let data = response.data;
     
@@ -36,8 +36,8 @@ export function UPDATE_RESERVATION({ commit }, payload) {
   return new Promise((resolve, reject) => {
     const id=payload[0]
     const formData=payload[1]
-    axios
-      .put(APIROUTE + `/hotel-bookings/${id}`, formData)
+    api
+      .put(`/hotel-bookings/${id}`, formData)
       .then((response) => {
         let data = response.data;
   
@@ -53,8 +53,8 @@ export function UPDATE_RESERVATION({ commit }, payload) {
 export function DELETE_RESERVATION({ commit }, id) {
   return new Promise((resolve, reject) => {
     
-    axios
-      .delete(APIROUTE + `/hotel-bookings/${id}`)
+    api
+      .delete(`/hotel-bookings/${id}`)
       .then((response) => {
         let data = response.data;
         
